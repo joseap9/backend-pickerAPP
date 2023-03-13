@@ -7,28 +7,16 @@ const { Router } = require('express');
 
 const router = Router();
 
-const { getPicker, crearEvento, actualizarEvento, eliminarEvento, getPedidos, getConteo, getInfo } = require('../controllers/events');
+const { getDetallePicker, getPickers, getInfo } = require('../controllers/events');
+
+//Obtener pickers
+router.get('/pickers/:search',getPickers);
 
 //Obtener pickers por el nombre dado
-router.get('/picker/:search',getPicker);
-
-//Obtener picker
-router.get('/conteo',getConteo);
+router.get('/picker/:search',getDetallePicker);
 
 //Obtener info
 router.get('/info',getInfo);
-
-//Obtener pedidos picker
-router.post('/pedidos',getPedidos);
-
-//Crear Evento
-router.post('/', crearEvento);
-
-//Actualizar Evento
-router.put('/:id',actualizarEvento);
-
-//Eliminar Evento
-router.delete('/:id', eliminarEvento);
 
 
 module.exports = router;

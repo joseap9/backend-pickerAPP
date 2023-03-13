@@ -11,7 +11,8 @@ const { validarJWT } = require('../middlewares/validar-jwt');
 router.post('/',
 [
     //middleware
-    check('rut', 'El rut debe tener minimo 7 digitos').isLength({ min: 7 }),
+    check('email', 'El email es obligatorio').isEmail(),
+    //check('rut', 'el rut debe tener minimo 6 caracteres').isLength({ min: 6}),
     check('password', 'la contraseña debe tener minimo 6 caracteres').isLength({ min: 6}),
     validarCampos
 ]

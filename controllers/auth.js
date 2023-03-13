@@ -5,17 +5,17 @@ const Usuario = require("../models/Usuario");
 const loginUsuario = async(req, res = response ) => {
 
     
-    const { rut, password } = req.body 
+    const { email, password } = req.body 
     try {
 
-        let usuario = await Usuario.findOne({ rut });
+        let usuario = await Usuario.findOne({ email });
 
         // si el rut existe
         if ( !usuario ) {
             return res.status(400).json({
                 ok: false,
                 msg: "usuario no existente",
-                rut
+                email
             });
         }
 
@@ -24,7 +24,6 @@ const loginUsuario = async(req, res = response ) => {
             return res.status(400).json({
                 ok: false,
                 msg: "contraseña invalida",
-                rut
             });
         }
 
@@ -49,12 +48,14 @@ const loginUsuario = async(req, res = response ) => {
 
 const revalidarToken = async (req, res = response ) => {
 
-    const { uid, nombre } = req.body;
+    const { uid, nombre } = req;
 
     //Generar JWT
-    const token = await generarJWT( uid, nombre)
+    const token = await generarJWT(uid, nombre)
     res.json({
         ok: true,
+        uid,
+        nombre,
         token
     })
 }
